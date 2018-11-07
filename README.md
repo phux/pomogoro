@@ -4,6 +4,8 @@ Pomogoro is a command-line tool to combine [todo.txt](http://todotxt.org/) (or
 any other text based todo file) and
 the [Pomodoro Technique](http://francescocirillo.com/pages/pomodoro-technique).
 
+![pomogoro screenshot](.github/screenshot.png)
+
 ## Features
 
 * made to work with `todo.txt` files but is compatible with any line-based text
