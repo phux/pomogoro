@@ -26,7 +26,13 @@ the [Pomodoro Technique](http://francescocirillo.com/pages/pomodoro-technique).
 go get -u github.com/phux/pomogoro
 cd $GOPATH/src/github.com/phux
 dep ensure
-go build
+go install
+```
+
+After this you can start pomogoro via
+
+```
+pomogoro --config <absolute/path/to/config.toml>
 ```
 
 ## Configuration
