@@ -18,7 +18,20 @@ the [Pomodoro Technique](http://francescocirillo.com/pages/pomodoro-technique).
 
 ## Installation
 
-### Requirements
+### Option 1: get a binary
+
+Go to [Releases](https://github.com/phux/pomogoro/releases) and grep the
+appropriate release for your architecture.
+
+```
+# extract
+tar -xvzf <release.tar.gz>
+# move the binary to a directory in your $PATH
+mv pomogoro ~/.local/bin
+
+```
+
+### Option 2: `go get`
 
 * [go dep](https://github.com/golang/dep)
 
