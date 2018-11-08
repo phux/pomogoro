@@ -23,5 +23,4 @@ changelog:
   filters:
     exclude:
     - '^docs:'
-    - '*.md:'
     - '^test:'
