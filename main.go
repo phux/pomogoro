@@ -284,37 +284,35 @@ func runCui() {
 		log.Panicln(err)
 	}
 
+	if err := g.SetKeybinding("", '?', gocui.ModNone, toggleHelpWindow); err != nil {
+		log.Panicln(err)
+	}
+
 	if err := g.SetKeybinding("", gocui.KeyCtrlC, gocui.ModNone, quit); err != nil {
 		log.Panicln(err)
 	}
+
 	if err := g.MainLoop(); err != nil && err != gocui.ErrQuit {
 		log.Panicln(err)
 	}
 }
 
+var displayingHelp bool
+
+func toggleHelpWindow(g *gocui.Gui, v *gocui.View) error {
+	v, _ = g.View("help")
+	if !displayingHelp {
+		_, _ = g.SetViewOnTop("help")
+		displayingHelp = true
+	} else {
+		_, _ = g.SetViewOnBottom("help")
+		displayingHelp = false
+	}
+	return nil
+}
+
 func layout(g *gocui.Gui) error {
 	maxX, maxY := g.Size()
-	if v, err := g.SetView("todos", 0, 0, maxX/2, maxY); err != nil {
-		if err != gocui.ErrUnknownView {
-			return err
-		}
-
-		v.Highlight = true
-		v.Wrap = true
-		v.Title = "Todos"
-		v.SelBgColor = gocui.ColorGreen
-		v.SelFgColor = gocui.ColorBlack
-
-		err := updateTodoView(g, v)
-		if err != nil {
-			return err
-		}
-
-		if _, err = setCurrentViewOnTop(g, "todos"); err != nil {
-			return err
-		}
-	}
-
 	if v, err := g.SetView("timer", maxX/2, 0, maxX, maxY/2); err != nil {
 		if err != gocui.ErrUnknownView {
 			return err
@@ -338,6 +336,45 @@ func layout(g *gocui.Gui) error {
 		v.SelFgColor = gocui.ColorBlack
 		v.Wrap = true
 		updateRecentLog(g)
+	}
+	if v, err := g.SetView("help", 0, maxY-9, maxX/2, maxY); err != nil {
+		if err != gocui.ErrUnknownView {
+			return err
+		}
+
+		v.Wrap = true
+		v.Title = "Shortcuts"
+		text := `
+j/k/Up/Down: move cursor up/down
+Enter: Start tracking
+p: pause timer
+c: cancel timer
+s: toggle summary/recent history
+r: refresh todo list
+CTRL-c: quit
+?: show this help
+		`
+		fmt.Fprintln(v, text)
+	}
+	if v, err := g.SetView("todos", 0, 0, maxX/2, maxY); err != nil {
+		if err != gocui.ErrUnknownView {
+			return err
+		}
+
+		v.Highlight = true
+		v.Wrap = true
+		v.Title = "Todos"
+		v.SelBgColor = gocui.ColorGreen
+		v.SelFgColor = gocui.ColorBlack
+
+		err := updateTodoView(g, v)
+		if err != nil {
+			return err
+		}
+
+		if _, err = setCurrentViewOnTop(g, "todos"); err != nil {
+			return err
+		}
 	}
 
 	return nil
