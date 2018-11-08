@@ -38,6 +38,7 @@ func summary(g *gocui.Gui, v *gocui.View) error {
 		}
 
 		displayingSummary = false
+		v.Highlight = false
 		updateRecentLog(g)
 		return nil
 	}
@@ -64,6 +65,7 @@ func summary(g *gocui.Gui, v *gocui.View) error {
 		}
 
 		displayingSummary = true
+		v.Highlight = true
 		_, err = g.SetCurrentView("recentLog")
 		return err
 	})
@@ -327,7 +329,7 @@ func layout(g *gocui.Gui) error {
 		}
 
 		v.Title = "History"
-		v.Highlight = true
+		v.Highlight = false
 		v.SelBgColor = gocui.ColorGreen
 		v.SelFgColor = gocui.ColorBlack
 		v.Wrap = true
