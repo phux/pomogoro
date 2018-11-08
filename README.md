@@ -64,14 +64,15 @@ PomodoroDuration = 25 # in minutes
 
 ## Keybindings
 
-| Key      | Function                                                   |
-| ---      | ---                                                        |
-| `j/k`    | Scroll down/up in windows                                  |
-| `Enter`  | Start tracking on current task in the todo window          |
-| `p`      | Toggle: Freeze timer                                       |
-| `c`      | Cancel current timer (task or break)                       |
-| `s`      | Toggle between summary per task per day and recent history |
-| `CTRL-c` | quit                                                       |
+| Key           | Function                                                   |
+| ---           | ---                                                        |
+| `j/k/Up/Down` | Scroll down/up in windows                                  |
+| `Enter`       | Start tracking on current task in the todo window          |
+| `p`           | Toggle: Freeze timer                                       |
+| `c`           | Cancel current timer (task or break)                       |
+| `s`           | Toggle between summary per task per day and recent history |
+| `r`           | Refresh todo list                                          |
+| `CTRL-c`      | quit                                                       |
 
 ## Todos
 
