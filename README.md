@@ -72,6 +72,7 @@ PomodoroDuration = 25 # in minutes
 | `c`           | Cancel current timer (task or break)                       |
 | `s`           | Toggle between summary per task per day and recent history |
 | `r`           | Refresh todo list                                          |
+| `?`           | Toggle: show keyboard bindings                             |
 | `CTRL-c`      | quit                                                       |
 
 ## Todos
