@@ -39,11 +39,15 @@ func summary(g *gocui.Gui, v *gocui.View) error {
 
 		displayingSummary = false
 		v.Highlight = false
+		todosView, _ := g.View("todos")
+		todosView.Highlight = true
 		updateRecentLog(g)
 		return nil
 	}
 
 	g.Update(func(g *gocui.Gui) error {
+		todosView, _ := g.View("todos")
+		todosView.Highlight = false
 		v, err := g.View("recentLog")
 		if err != nil {
 			log.Printf("could not update recent log view: %s", err)
