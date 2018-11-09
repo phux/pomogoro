@@ -206,8 +206,10 @@ func setCurrentViewOnTop(g *gocui.Gui, name string) (*gocui.View, error) {
 }
 
 func pauseToggle(g *gocui.Gui, v *gocui.View) error {
-	timer.PauseToggle()
-	updateTimerView("Paused", g)
+	if timer != nil {
+		timer.PauseToggle()
+		updateTimerView("Paused", g)
+	}
 	return nil
 }
 
