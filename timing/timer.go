@@ -13,6 +13,7 @@ type Timer struct {
 	Elapsed     int
 	remaining   int
 	Total       int
+	IdlingSince time.Time
 }
 
 // PauseToggle controls the timer
@@ -31,6 +32,9 @@ func (t *Timer) Reset() {
 	t.IsActive = false
 	t.Elapsed = 0
 	t.CurrentTodo = ""
+}
+func (t *Timer) Idle() {
+	t.IdlingSince = time.Now()
 }
 
 // NewTimer constructor
@@ -52,6 +56,10 @@ func (t *Timer) Progress() bool {
 	t.IsActive = true
 
 	return true
+}
+
+func (t *Timer) IdlingTime() time.Duration {
+	return time.Since(t.IdlingSince)
 }
 
 // RemainingToString returns remaining time in mm:ss

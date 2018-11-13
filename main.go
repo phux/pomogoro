@@ -77,10 +77,16 @@ func summary(g *gocui.Gui, v *gocui.View) error {
 }
 
 func trackTime(g *gocui.Gui, v *gocui.View) error {
-	if timer != nil && timer.IsActive {
-		updateTimerView("Multitask", g)
-		return nil
+	if timer != nil {
+		if timer.IsActive {
+			updateTimerView("Multitask", g)
+			return nil
+		}
+		if conf.LogIdleTime {
+			history.Append("Idle", int(timer.IdlingTime().Seconds()), conf)
+		}
 	}
+
 	_, y := v.Cursor()
 
 	var err error
@@ -118,6 +124,7 @@ func startTracking(g *gocui.Gui) {
 	history.Append(timer.CurrentTodo, timer.Elapsed, conf)
 	updateRecentLog(g)
 	notify("Finished", timer.CurrentTodo)
+	timer.Idle()
 
 	if conf.PomodoroEnabled {
 		go runBreak(g)
@@ -136,6 +143,7 @@ func runBreak(g *gocui.Gui) {
 	notify("Finished", timer.CurrentTodo)
 	timer.CurrentTodo = "--------------"
 	timer.Reset()
+	timer.Idle()
 }
 
 func updateTimerView(text string, g *gocui.Gui) {
@@ -206,8 +214,10 @@ func setCurrentViewOnTop(g *gocui.Gui, name string) (*gocui.View, error) {
 }
 
 func pauseToggle(g *gocui.Gui, v *gocui.View) error {
-	timer.PauseToggle()
-	updateTimerView("Paused", g)
+	if timer != nil {
+		timer.PauseToggle()
+		updateTimerView("Paused", g)
+	}
 	return nil
 }
 
@@ -220,13 +230,19 @@ func cancel(g *gocui.Gui, v *gocui.View) error {
 }
 
 func quit(g *gocui.Gui, v *gocui.View) error {
-	if timer != nil && timer.IsActive {
-		err := cancel(g, v)
-		if err != nil {
-			return err
-		}
+	if timer != nil {
+		if !timer.IsActive {
+			if conf.LogIdleTime {
+				history.Append("Idle", int(timer.IdlingTime().Seconds()), conf)
+			}
+		} else {
+			err := cancel(g, v)
+			if err != nil {
+				return err
+			}
 
-		time.Sleep(time.Second)
+			time.Sleep(time.Second)
+		}
 	}
 	return gocui.ErrQuit
 }

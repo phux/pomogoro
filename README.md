@@ -60,6 +60,7 @@ LogFile = "/absolute/path/to/pomogoro.log" # tracking log file
 BreakDuration = 5 # in minutes
 PomodoroEnabled = true # whether to use pomodoro timer or not
 PomodoroDuration = 25 # in minutes
+LogIdleTime = true # also log idle times
 ```
 
 ## Keybindings

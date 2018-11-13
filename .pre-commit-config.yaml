@@ -20,4 +20,7 @@ repos:
       - id: go-vet
       - id: go-lint
       - id: golangci-lint
+        args:
+          - -c .golangci.yml
+          - -E staticcheck
       - id: go-critic
