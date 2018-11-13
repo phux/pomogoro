@@ -1,0 +1,28 @@
+linters:
+  disable:
+    - govet
+  enable:
+    - golint
+    - gosec
+    - dupl
+    - goimports
+    - varcheck
+    - unconvert
+    - goconst
+    - deadcode
+    - gocyclo
+    - gofmt
+    - unparam
+    - prealloc
+    - nakedret
+    - structcheck
+    - ineffassign
+    - lll
+    - megacheck
+    - typecheck
+    - depguard
+    - maligned
+    - errcheck
+    - interfacer
+    - misspell
+    - staticcheck
