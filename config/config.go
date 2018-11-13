@@ -16,6 +16,7 @@ type Config struct {
 	BreakDuration    int
 	PomodoroEnabled  bool
 	LogIdleTime      bool
+	LogBreakTime     bool
 }
 
 // Load builds Config struct from given confPath

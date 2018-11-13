@@ -142,6 +142,9 @@ func runBreak(g *gocui.Gui) {
 	updateTimerView("IDLE", g)
 	notify("Finished", timer.CurrentTodo)
 	timer.CurrentTodo = "--------------"
+	if conf.LogBreakTime {
+		history.Append("Break", timer.Elapsed, conf)
+	}
 	timer.Reset()
 	timer.Idle()
 }

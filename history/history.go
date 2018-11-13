@@ -29,6 +29,9 @@ type PomodoroStat struct {
 
 // Append logs to configured history file
 func Append(todo string, duration int, conf *config.Config) {
+	if duration < 60 {
+		return
+	}
 	f := openLogFile(conf)
 	defer f.Close()
 	writer := bufio.NewWriter(f)
