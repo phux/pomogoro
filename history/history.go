@@ -44,6 +44,15 @@ func Append(todo string, duration int, conf *config.Config) {
 
 // Aggregate the logs from file specified in conf
 func Aggregate(conf *config.Config) (*History, error) {
+	if _, err := os.Stat(conf.LogFile); os.IsNotExist(err) {
+		return nil, fmt.Errorf(
+			fmt.Sprintf(
+				"LogFile '%s' does not exist.\nIt will be created on first log entry.",
+				conf.LogFile,
+			),
+		)
+	}
+
 	content, err := ioutil.ReadFile(conf.LogFile)
 	if err != nil {
 		return nil, err

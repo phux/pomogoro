@@ -25,7 +25,12 @@ var timer *timing.Timer
 func main() {
 	confPath = flag.String("config", "", "absolute path to toml config file")
 	flag.Parse()
-	conf = config.Load(*confPath)
+
+	var err error
+	conf, err = config.Load(*confPath)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	runCui()
 }
@@ -319,7 +324,7 @@ func runCui() {
 var displayingHelp bool
 
 func toggleHelpWindow(g *gocui.Gui, v *gocui.View) error {
-	v, _ = g.View("help")
+	_, _ = g.View("help")
 	if !displayingHelp {
 		_, _ = g.SetViewOnTop("help")
 		displayingHelp = true
