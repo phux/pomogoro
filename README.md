@@ -79,9 +79,10 @@ LogBreakTime = true # also log breaks
 
 ## Todos
 
+- [ ] Jira: Fetch tasks & push time trackings (WIP)
 - [ ] reduce 1s lag after key press
 - [ ] cleanup codebase & more tests
-- [ ] Jira: Fetch tasks & push time trackings
+- [ ] group by todo.txt projects
 
 ## Built With
 
