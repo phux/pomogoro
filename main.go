@@ -84,8 +84,12 @@ func summary(g *gocui.Gui, v *gocui.View) error {
 func trackTime(g *gocui.Gui, v *gocui.View) error {
 	if timer != nil {
 		if timer.IsActive {
-			updateTimerView("Multitask", g)
-			return nil
+			if timer.CurrentTodo != "Break" {
+				updateTimerView("Multitask", g)
+				return nil
+			}
+			timer.Cancel()
+			time.Sleep(1 * time.Second)
 		}
 		if conf.LogIdleTime {
 			history.Append("Idle", int(timer.IdlingTime().Seconds()), conf)
