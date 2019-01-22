@@ -63,8 +63,13 @@ func (d *DailyStat) Summary() []string {
 		}
 
 	}
+	sum := 0
 	for todo, duration := range durations {
 		list = append(list, fmt.Sprintf("%s\n\tTotal: %d:%02d h\n", todo, duration/60, duration%60))
+		sum += duration
 	}
+
+	list = append(list, fmt.Sprintf("Total: %d:%02d h\n\n", sum/60, sum%60))
+
 	return list
 }

@@ -12,7 +12,6 @@ linters:
     - deadcode
     - gocyclo
     - gofmt
-    - unparam
     - prealloc
     - nakedret
     - structcheck

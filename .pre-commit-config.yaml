@@ -23,4 +23,4 @@ repos:
         args:
           - -c .golangci.yml
           - -E staticcheck
-      - id: go-critic
+      # - id: go-critic

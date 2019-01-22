@@ -181,7 +181,7 @@ func updateTimerView(text string, g *gocui.Gui) {
 	})
 }
 
-func updateTodoView(g *gocui.Gui, v *gocui.View) error {
+func updateTodoView(_ *gocui.Gui, v *gocui.View) error {
 	v.Clear()
 	list, err := todotxt.ReadTodoTxt(conf)
 	if err != nil {
@@ -225,7 +225,7 @@ func setCurrentViewOnTop(g *gocui.Gui, name string) (*gocui.View, error) {
 	return g.SetViewOnTop(name)
 }
 
-func pauseToggle(g *gocui.Gui, v *gocui.View) error {
+func pauseToggle(g *gocui.Gui, _ *gocui.View) error {
 	if timer != nil {
 		timer.PauseToggle()
 		updateTimerView("Paused", g)
@@ -233,7 +233,7 @@ func pauseToggle(g *gocui.Gui, v *gocui.View) error {
 	return nil
 }
 
-func cancel(g *gocui.Gui, v *gocui.View) error {
+func cancel(g *gocui.Gui, _ *gocui.View) error {
 	if timer != nil {
 		timer.Cancel()
 		updateTimerView("Canceled", g)
@@ -259,12 +259,12 @@ func quit(g *gocui.Gui, v *gocui.View) error {
 	return gocui.ErrQuit
 }
 
-func cursorDown(g *gocui.Gui, v *gocui.View) error {
+func cursorDown(_ *gocui.Gui, v *gocui.View) error {
 	v.MoveCursor(0, 1, false)
 	return nil
 }
 
-func cursorUp(g *gocui.Gui, v *gocui.View) error {
+func cursorUp(_ *gocui.Gui, v *gocui.View) error {
 	v.MoveCursor(0, -1, false)
 	return nil
 }
@@ -327,7 +327,7 @@ func runCui() {
 
 var displayingHelp bool
 
-func toggleHelpWindow(g *gocui.Gui, v *gocui.View) error {
+func toggleHelpWindow(g *gocui.Gui, _ *gocui.View) error {
 	_, _ = g.View("help")
 	if !displayingHelp {
 		_, _ = g.SetViewOnTop("help")
