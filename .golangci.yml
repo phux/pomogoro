@@ -1,8 +1,8 @@
 linters:
   disable:
-    - govet
-  enable:
     - golint
+  enable:
+    - govet
     - gosec
     - dupl
     - goimports
