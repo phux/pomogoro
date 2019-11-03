@@ -16,6 +16,5 @@ func NewTracking(duration time.Duration) Tracking {
 func NewTrackingWithDate(duration time.Duration, date time.Time) Tracking {
 	tracking := NewTracking(duration)
 	tracking.date = date
-
 	return tracking
 }

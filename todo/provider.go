@@ -4,11 +4,10 @@ import (
 	"bufio"
 	"io"
 	"log"
-	"time"
 )
 
 type Provider interface {
-	Load(time.Duration) []*Todo
+	Load() []*Todo
 }
 
 type TodoTxtProvider struct {
@@ -19,23 +18,20 @@ func NewTodoTxtProvider(reader io.Reader) TodoTxtProvider {
 	return TodoTxtProvider{reader: reader}
 }
 
-func (tp TodoTxtProvider) Load(start time.Time) []*Todo {
+func (tp TodoTxtProvider) Load() ([]*Todo, error) {
 	todos := make([]*Todo, 0)
 
 	scanner := bufio.NewScanner(tp.reader)
 	for scanner.Scan() {
-		t, err := tp.parse(scanner.Text())
-		if err != nil {
-			log.Fatal("could not parse todo from file", err)
-		} else {
-			todos = append(todos, t)
-		}
+		todo, _ := tp.parse(scanner.Text())
+		todos = append(todos, todo)
 	}
+
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
 
-	return todos
+	return todos, nil
 }
 
 func (tp TodoTxtProvider) parse(line string) (*Todo, error) {
