@@ -19,7 +19,7 @@ func NewTodoTxtProvider(reader io.Reader) TodoTxtProvider {
 }
 
 func (tp TodoTxtProvider) Load() ([]*Todo, error) {
-	todos := make([]*Todo, 0)
+	todos := []*Todo{}
 
 	scanner := bufio.NewScanner(tp.reader)
 	for scanner.Scan() {
@@ -34,6 +34,6 @@ func (tp TodoTxtProvider) Load() ([]*Todo, error) {
 	return todos, nil
 }
 
-func (tp TodoTxtProvider) parse(line string) (*Todo, error) {
+func (TodoTxtProvider) parse(line string) (*Todo, error) {
 	return NewTodo(line), nil
 }
