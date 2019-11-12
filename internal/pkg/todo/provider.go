@@ -6,10 +6,6 @@ import (
 	"log"
 )
 
-type Provider interface {
-	Load() []*Todo
-}
-
 type TodoTxtProvider struct {
 	reader io.Reader
 }

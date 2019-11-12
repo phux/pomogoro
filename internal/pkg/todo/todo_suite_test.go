@@ -6,7 +6,7 @@ import (
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/phux/pomogoro/todo"
+	"github.com/phux/pomogoro/internal/pkg/todo"
 )
 
 func TestTodo(t *testing.T) {
