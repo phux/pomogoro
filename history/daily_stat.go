@@ -48,7 +48,6 @@ func (d *DailyStat) ToList() []string {
 			list = append(list, fmt.Sprintf("%s %s | %s | %d minutes", stat.date, stat.startTime, stat.todo, stat.duration))
 			durations[stat.todo] += stat.duration
 		}
-
 	}
 	return list
 }
@@ -61,7 +60,6 @@ func (d *DailyStat) Summary() []string {
 		for _, stat := range stats {
 			durations[stat.todo] += stat.duration
 		}
-
 	}
 	sum := 0
 	for todo, duration := range durations {

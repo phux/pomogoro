@@ -7,15 +7,12 @@ linters:
     - dogsled
     - dupl
     - errcheck
-    - funlen
     - gochecknoinits
     - goconst
     - gocritic
     - gocyclo
     - gofmt
     - goimports
-    - golint
-    - gomnd
     - goprintffuncname
     - gosec
     - gosimple
@@ -26,7 +23,6 @@ linters:
     - misspell
     - nakedret
     - rowserrcheck
-    - scopelint
     - staticcheck
     - structcheck
     - stylecheck
@@ -36,8 +32,12 @@ linters:
     - unused
     - varcheck
     - whitespace
-    - gochecknoglobals
     - gocognit
-    - godox
     - maligned
     - prealloc
+    # - godox
+    # - gochecknoglobals
+    # - gomnd
+    # - golint
+    # - funlen
+    # - scopelint
