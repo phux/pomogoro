@@ -1,4 +1,4 @@
-# Pomogoro
+# Pomogoro [![Build Status](https://travis-ci.org/phux/pomogoro.svg?branch=master)](https://travis-ci.org/phux/pomogoro)
 
 Pomogoro is a command-line tool to combine [todo.txt](http://todotxt.org/) (or
 any other text based todo file) and
