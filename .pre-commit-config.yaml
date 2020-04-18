@@ -1,7 +1,7 @@
 fail_fast: false
 repos:
   - repo: git@github.com:pre-commit/pre-commit-hooks
-    sha: v1.4.0-1
+    rev: master
     hooks:
       - id: check-case-conflict
       - id: check-json
@@ -14,13 +14,18 @@ repos:
           - --autofix
       - id: trailing-whitespace
   - repo: git://github.com/dnephin/pre-commit-golang
-    sha: HEAD
+    rev: master
     hooks:
+      - id: go-build
       - id: go-fmt
-      - id: go-vet
+      - id: go-imports
+      - id: go-cyclo
+        args: [-over=15]
+      - id: validate-toml
+      - id: go-critic
+      - id: go-unit-tests
       - id: go-lint
       - id: golangci-lint
         args:
           - -c .golangci.yml
           - -E staticcheck
-      # - id: go-critic
