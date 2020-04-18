@@ -8,13 +8,13 @@ the [Pomodoro Technique](http://francescocirillo.com/pages/pomodoro-technique).
 
 ## Features
 
-* made to work with `todo.txt` files but is compatible with any line-based text
-    files
-* time tracking history per task per day
-* OS notifications (pomodoro finished, break started, break finished)
-* option to enable/disable pomodoro style tracking
-* configurable pomodoro and break durations
-* auto break after one pomodoro is finished
+- made to work with `todo.txt` files but is compatible with any line-based text
+  files
+- time tracking history per task per day
+- OS notifications (pomodoro finished, break started, break finished)
+- option to enable/disable pomodoro style tracking
+- configurable pomodoro and break durations
+- auto break after one pomodoro is finished
 
 ## Installation
 
@@ -33,13 +33,11 @@ mv pomogoro ~/.local/bin
 
 ### Option 2: `go get`
 
-* [go dep](https://github.com/golang/dep)
+- [golang](https://golang.org/)
+- `PATH` contains path to `go/bin/` directory
 
 ```
 go get -u github.com/phux/pomogoro
-cd $GOPATH/src/github.com/phux
-dep ensure
-go install
 ```
 
 After this you can start pomogoro via
@@ -50,8 +48,7 @@ pomogoro --config <absolute/path/to/config.toml>
 
 ## Configuration
 
-You need to pass an absolute path to a config.toml file via `--config
-/your/path/to/config.toml`.
+You need to pass an absolute path to a config.toml file via `--config /your/path/to/config.toml`.
 
 ```
 # config.toml
@@ -67,7 +64,7 @@ LogBreakTime = true # also log breaks
 ## Keybindings
 
 | Key           | Function                                                   |
-| ---           | ---                                                        |
+| ------------- | ---------------------------------------------------------- |
 | `j/k/Up/Down` | Scroll down/up in windows                                  |
 | `Enter`       | Start tracking on current task in the todo window          |
 | `p`           | Toggle: Freeze timer                                       |
@@ -86,7 +83,7 @@ LogBreakTime = true # also log breaks
 
 ## Built With
 
-* [gocui](https://github.com/jroimartin/gocui) - Terminal UI
+- [gocui](https://github.com/jroimartin/gocui) - Terminal UI
 
 ## License
 
