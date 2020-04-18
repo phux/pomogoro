@@ -1,27 +1,43 @@
 linters:
-  disable:
-    - govet
+  disable-all: true
   enable:
-    - golint
-    - gosec
-    - dupl
-    - goimports
-    - varcheck
-    - unconvert
-    - goconst
+    - bodyclose
     - deadcode
+    - depguard
+    - dogsled
+    - dupl
+    - errcheck
+    - gochecknoinits
+    - goconst
+    - gocritic
     - gocyclo
     - gofmt
-    - prealloc
-    - nakedret
-    - structcheck
+    - goimports
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
     - ineffassign
-    - lll
-    - megacheck
-    - typecheck
-    - depguard
-    - maligned
-    - errcheck
     - interfacer
+    - lll
     - misspell
+    - nakedret
+    - rowserrcheck
     - staticcheck
+    - structcheck
+    - stylecheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - varcheck
+    - whitespace
+    - gocognit
+    - maligned
+    - prealloc
+    # - godox
+    # - gochecknoglobals
+    # - gomnd
+    # - golint
+    # - funlen
+    # - scopelint

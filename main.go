@@ -68,7 +68,7 @@ func summary(g *gocui.Gui, v *gocui.View) error {
 		dailyStats := history.GetStatsForLastDays(30)
 		for _, stat := range dailyStats {
 			for _, line := range stat.Summary() {
-				fmt.Fprintln(v, fmt.Sprintf("%s :::: %s", stat.GetDate(), line))
+				fmt.Fprintf(v, "%s :::: %s\n", stat.GetDate(), line)
 			}
 			fmt.Fprintln(v, "================")
 		}

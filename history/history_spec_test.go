@@ -22,7 +22,6 @@ var _ = Describe("History", func() {
 	})
 
 	Describe("Writing log files", func() {
-
 		Context("On first write without existing file", func() {
 			It("should create the file and write the first line", func() {
 				err := os.Remove(conf.LogFile)
@@ -30,7 +29,7 @@ var _ = Describe("History", func() {
 					log.Fatal(err)
 				}
 
-				history.Append("Some Todo", 10, conf)
+				history.Append("Some Todo", 60, conf)
 
 				content, _ := ioutil.ReadFile(conf.LogFile)
 				lines := strings.Split(string(content), "\n")
@@ -40,15 +39,14 @@ var _ = Describe("History", func() {
 
 		Context("On writing to an existing file", func() {
 			It("should just append the line", func() {
-				history.Append("First Todo", 10, conf)
-				history.Append("Second Todo", 10, conf)
+				history.Append("First Todo", 60, conf)
+				history.Append("Second Todo", 60, conf)
 
 				content, _ := ioutil.ReadFile(conf.LogFile)
 				lines := strings.Split(string(content), "\n")
 				Expect(len(lines)).To(Equal(3))
 			})
 		})
-
 	})
 })
 

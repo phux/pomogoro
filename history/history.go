@@ -46,10 +46,8 @@ func Append(todo string, duration int, conf *config.Config) {
 func Aggregate(conf *config.Config) (*History, error) {
 	if _, err := os.Stat(conf.LogFile); os.IsNotExist(err) {
 		return nil, fmt.Errorf(
-			fmt.Sprintf(
-				"LogFile '%s' does not exist.\nIt will be created on first log entry.",
-				conf.LogFile,
-			),
+			"LogFile '%s' does not exist.\nIt will be created on first log entry",
+			conf.LogFile,
 		)
 	}
 
@@ -106,7 +104,7 @@ func lineToStat(line string) (*PomodoroStat, error) {
 	stat := &PomodoroStat{}
 	parts := strings.Split(line, " | ")
 	if len(parts) != 3 {
-		return nil, fmt.Errorf("Line does not have 2 | separators: %s", line)
+		return nil, fmt.Errorf("line does not have 2 | separators: %s", line)
 	}
 
 	dateParts := strings.Split(parts[0], " ")
