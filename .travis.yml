@@ -26,9 +26,6 @@ jobs:
     - name: tag
       script: standard-version
       if: branch = master
-    - name: deploy
-      if: tag IS present
-      script: curl -sL https://git.io/goreleaser | bash
 
 before_install:
   - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $GOPATH/bin v1.24.0
@@ -39,5 +36,4 @@ deploy:
     script: curl -sL https://git.io/goreleaser | bash
     on:
       tags: true
-      branch: master
       condition: $TRAVIS_OS_NAME = linux
