@@ -33,7 +33,7 @@ stages:
   - lint
   - goreleaser_check
   - name: tag
-    if: branch = master
+    if: NOT type IN (pull_request) AND branch = master
 
 before_install:
   - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $GOPATH/bin v1.24.0
