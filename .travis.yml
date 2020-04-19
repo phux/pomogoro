@@ -26,14 +26,16 @@ jobs:
     - stage: tag
       script: |
         npm i -g standard-version
-        standard-version
+        standard-version --pre-release
+        git push >/dev/null 2>&1
 
 stages:
   - test
   - lint
   - goreleaser_check
   - name: tag
-    if: NOT type IN (pull_request) AND branch = master
+    # if: NOT type IN (pull_request) AND branch = master
+    if: branch = master
 
 before_install:
   - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $GOPATH/bin v1.24.0
