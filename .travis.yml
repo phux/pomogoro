@@ -23,9 +23,16 @@ jobs:
       script: golangci-lint run -c .golangci.yml ./...
     - stage: goreleaser check
       script: curl -sfL https://git.io/goreleaser | sh -s -- check # check goreleaser config for deprecations
-    - name: tag
-      script: standard-version
-      if: branch = master
+    - stage: tag
+      script: |
+        npm i -g standard-version
+        standard-version
+
+stages:
+  - test
+  - lint
+  - name: tag
+    if: branch = master
 
 before_install:
   - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $GOPATH/bin v1.24.0
