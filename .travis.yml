@@ -33,6 +33,7 @@ jobs:
       script: |
           npm i -g standard-version
           standard-version --pre-release
+          git checkout master
           git push --follow-tags
 
 stages:
