@@ -1,5 +1,9 @@
 language: go
 
+env:
+  global:
+    secure: "dGfDjbjsah83gU+KQCjV1Pj6w5ETOWUH5OzCtSzApP4DyhgxD84JXO9Kd76fa/Pp+sXGJURXzvb6zLUZuc3KN1Ey24YL4qEKYw+JRcGnSTkpQUbqRh2Bwbzi0gnqAU6xeUL2d7TmuooPLs4XrL9XH4+33Nqhp2JsBO6zLThgU5J3uyzXYCqRrcTHgFG1fSgNcYiepy90Htpn+4e1GsfUcpJ/qF3Y8GumD+zNE8kVeLD170QdRWj0Shqmdf+Xikb7AuRF8Zs5nJwJm2UmfTLcmUtRaOI5yrdjFEkrhkmfyuEXwpVRFvIl5TLi8veKEUkQHi5TOVSTphCQ5SNSMd/vfsaxwEyQ6eTyDOby4w4KAZULUe9O30Db2d+Kuv3+7OtslPQtqWu8qNZSMYFjjWenPdXvmXP37yMencW9jDVTrYQS/+Z6fcYq+eDePYGsiEepSd7t5PeHbaZTnACJYx+QHRDOL6B5FrzjO/mHckkhzAG3O/ZDhzBqyurXcqaYYy4sO6zUl2XYKBn/ZB4C6y3/cafF6geat98mSzm2LRK/6jTW1/gWSOyk81yi2FayujvYR7yneC9e8VzsRhA6o37+5dQ3enLJWkEBmwI/jWNggcadiUPdzcz59lHonfrqu3niPJyUWVbD15vIUF9LhkwWcZHLcqdlodVzlhHHDPNVdUg="
+
 branches:
   only: # speed up CI: don't build pull requests twice
     - "master"
@@ -20,7 +24,9 @@ jobs:
   include:
     - script: go test -v ./...
     - stage: lint
-      script: golangci-lint run -c .golangci.yml ./...
+      script: |
+        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $GOPATH/bin v1.24.0
+        golangci-lint run -c .golangci.yml ./...
     - stage: goreleaser_check
       script: curl -sfL https://git.io/goreleaser | sh -s -- check # check goreleaser config for deprecations
     - stage: tag
@@ -37,9 +43,20 @@ stages:
     # if: NOT type IN (pull_request) AND branch = master
     if: branch = master
 
-before_install:
-  - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $GOPATH/bin v1.24.0
 
+before_deploy:
+  - |
+       declare -r SSH_FILE="$(mktemp -u $HOME/.ssh/XXXXX)"
+       openssl aes-256-cbc \
+         -K $encrypted_5bc0aa7c727b_key \
+         -iv $encrypted_5bc0aa7c727b_iv \
+         -in ".travis/github_deploy_key.enc" \
+         -out "$SSH_FILE" -d
+       chmod 600 "$SSH_FILE" \
+         && printf "%s\n" \
+              "Host github.com" \
+              "  IdentityFile $SSH_FILE" \
+              "  LogLevel ERROR" >> ~/.ssh/config
 deploy:
   - provider: script
     skip_cleanup: true
