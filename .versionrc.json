@@ -1,5 +1,7 @@
 {
+  "commitUrlFormat": "https://github.com/phux/pomogoro/commit/{{hash}}",
   "compareUrlFormat": "https://github.com/phux/pomogoro/compare/{{previousTag}}...{{currentTag}}",
+  "issueUrlFormat": "https://github.com/phux/pomogoro/issues/{{id}}",
   "types": [
     {
       "section": "Features",
@@ -10,7 +12,7 @@
       "type": "fix"
     },
     {
-      "hidden": true,
+      "section": "Chore",
       "type": "chore"
     },
     {

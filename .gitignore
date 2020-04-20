@@ -1,3 +1,4 @@
 ./pomogoro
 vendor
 dist
+/.gtm/
